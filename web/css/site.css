@@ -113,3 +113,24 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.login-logo__img {
+    display: flex;
+    height: 130px;
+    min-height: 100px;
+    width: 100%;
+    background: #fff url(../images/logo.svg) center center no-repeat;
+    background-size: 100% auto;
+    background-position: -9px 64%;
+    transition: none;
+}
+
+.login-page {
+    display: flex!important;
+    height: 100vh!important;
+}
+
+.login-box {
+    margin: auto!important;
+    border-radius: 3px;
+}
