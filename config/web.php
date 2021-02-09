@@ -1,10 +1,5 @@
 <?php
 
-use Dotenv\Dotenv;
-
-$dotenv = Dotenv::createImmutable(substr(__DIR__, 0, -7));
-$dotenv->load();
-
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -16,6 +11,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'language' => 'ru',
     'components' => [
         'request' => [
             'cookieValidationKey' => $_ENV['COOKIE_KEY'] ?? '',
@@ -47,14 +43,12 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
