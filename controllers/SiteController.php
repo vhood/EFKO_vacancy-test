@@ -3,12 +3,12 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
+use yii\web\Controller;
 use app\models\ContactForm;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use app\models\Forms\LoginForm;
 
 class SiteController extends Controller
 {
@@ -19,18 +19,24 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'actions' => ['login'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
                 ],
+                'denyCallback' => function($rule, $action) {
+                    return Yii::$app->response->redirect(['site/login']);
+                },
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -77,7 +83,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         }
 
         $model->password = '';
@@ -95,7 +101,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return Yii::$app->response->redirect(['site/login']);
     }
 
     /**

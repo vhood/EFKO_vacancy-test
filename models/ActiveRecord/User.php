@@ -25,33 +25,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['email', 'password'], 'required'],
-            [['email'], 'email'],
-            [['is_admin'], 'boolean'],
-            [['email', 'password', 'full_name'], 'string', 'max' => 255],
-            [['email'], 'unique'],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'email' => 'e-mail',
-            'password' => 'Пароль',
-            'full_name' => 'Ф.И.О.',
-            'is_admin' => 'Руководитель',
-        ];
-    }
-
-    /**
      * @param mixed $insert
      * @return bool
      */
@@ -64,6 +37,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             return true;
         }
         return false;
+    }
+
+    /**
+     * @param string $password
+     * @return bool
+     */
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 
     /**
