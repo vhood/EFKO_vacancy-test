@@ -47,6 +47,13 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'user',
+                    'except' => ['options']
+                ],
+                'login' => 'site/login',
+                'logout' => 'site/logout',
             ],
         ],
     ],

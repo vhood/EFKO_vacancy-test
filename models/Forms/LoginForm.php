@@ -20,7 +20,6 @@ class LoginForm extends Model
 
     private $_user = false;
 
-
     /**
      * {@inheritdoc}
      */

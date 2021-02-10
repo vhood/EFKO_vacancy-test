@@ -4,11 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Response;
-use yii\web\Controller;
-use app\models\ContactForm;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use app\models\Forms\LoginForm;
+use yii\helpers\ArrayHelper;
 
 class SiteController extends Controller
 {
@@ -17,31 +15,14 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::class,
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['login'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                ],
-                'denyCallback' => function($rule, $action) {
-                    return Yii::$app->response->redirect(['site/login']);
-                },
-            ],
+        return ArrayHelper::merge(parent::behaviors(), [
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -102,33 +83,5 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return Yii::$app->response->redirect(['site/login']);
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
     }
 }
