@@ -6,11 +6,11 @@
             'items' => [
                 ['label' => Yii::$app->user->identity->email, 'options' => ['class' => 'header']],
                 ['label' => 'Профиль', 'icon' => 'user', 'url' => ['user/view', 'id' => Yii::$app->user->identity->id]],
-                ['label' => 'Мои отпуски', 'icon' => 'plane', 'url' => '#'],
+                ['label' => 'Мои отпуски', 'icon' => 'plane', 'url' => ['vacation/user-index']],
 
                 ['label' => 'Компания', 'options' => ['class' => 'header']],
                 ['label' => 'Список сотрудников', 'icon' => 'users', 'url' => ['user/index']],
-                ['label' => 'Отпуски сотрудников', 'icon' => 'map', 'url' => '#'],
+                ['label' => 'Отпуски сотрудников', 'icon' => 'map', 'url' => ['vacation/index']],
 
                 ['label' => 'development mode', 'options' => ['class' => 'header'], 'visible' => YII_DEBUG && Yii::$app->user->identity->is_admin],
                 [

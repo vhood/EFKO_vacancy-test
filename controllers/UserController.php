@@ -3,13 +3,14 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\ActiveRecord\User;
-use app\models\Forms\CreateUser;
-use app\models\Forms\EditUser;
-use yii\data\ActiveDataProvider;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use app\models\Forms\EditUser;
+use app\controllers\Controller;
+use app\models\Forms\CreateUser;
+use yii\data\ActiveDataProvider;
+use app\models\ActiveRecord\User;
+use yii\web\NotFoundHttpException;
 
 /**
  * UserController implements the CRUD actions for User model.

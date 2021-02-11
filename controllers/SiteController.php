@@ -5,8 +5,9 @@ namespace app\controllers;
 use Yii;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\Forms\LoginForm;
 use yii\helpers\ArrayHelper;
+use app\controllers\Controller;
+use app\models\Forms\LoginForm;
 
 class SiteController extends Controller
 {

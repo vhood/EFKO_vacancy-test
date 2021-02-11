@@ -52,6 +52,15 @@ $config = [
                     'controller' => 'user',
                     'except' => ['options']
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'vacation',
+                    'except' => ['options', 'view'],
+                    'extraPatterns' => [
+                        'GET my-vacations' => 'user-index',
+                        'POST confirm' => 'confirm',
+                    ],
+                ],
                 'login' => 'site/login',
                 'logout' => 'site/logout',
             ],
